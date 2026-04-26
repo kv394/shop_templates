@@ -242,10 +242,8 @@
     </div>
   </article>
 
-  <!-- BarberSaaS SDK -->
-  <script src="https://barbersaas-henna.vercel.app/barbersaas-sdk.js"></script>
-  <!-- Booking Modal logic -->
-  <script src="https://barbersaas-henna.vercel.app/booking-modal.js" data-shop-id="cmn9kj24n0000lqzc7kcsmpst"></script>
+  <!-- Core SDK -->
+  <script src="/barbersaas-sdk.js"></script>
 
   <script>
     window.addEventListener("load", function () {
@@ -257,11 +255,46 @@
           });
           return;
         }
-
-        BarberSaaS.init("cmn9kj24n0000lqzc7kcsmpst");
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const shopId = urlParams.get("shopId") || "cmn9kj24n0000lqzc7kcsmpst";
+        
+        // Initialize SDK without hardcoded colors so it can fetch the shop data
+        BarberSaaS.init(shopId, { position: "bottom-right" });
 
         BarberSaaS.getPublicData()
           .then((data) => {
+            try {
+              const shop = data.shop || {};
+              
+              // 1. Extract dynamic theme colors set by THIS specific shop's admin
+              const primaryColor = shop.primaryColor || "#c0a05b"; // fallback to template's accent-gold
+              const secondaryColor = shop.secondaryColor || "#1a1a1a"; // fallback to template's primary-color
+              
+              // 2. Set them on the SDK so widgets can read them
+              window.BarberSaaS.primaryColor = primaryColor;
+              window.BarberSaaS.secondaryColor = secondaryColor;
+              
+              // 3. Inject CSS Variables onto the page so user profile avatars inherit them
+              document.documentElement.style.setProperty('--primary', primaryColor);
+              document.documentElement.style.setProperty('--theme-color', primaryColor);
+              document.documentElement.style.setProperty('--brand-color', primaryColor);
+              if (document.body) {
+                 document.body.style.setProperty('--primary', primaryColor);
+                 document.body.style.setProperty('--theme-color', primaryColor);
+                 document.body.style.setProperty('--brand-color', primaryColor);
+              }
+              
+              // 4. Inject the Chatbot and Booking widgets dynamically NOW that colors are set
+              const modalScript = document.createElement("script");
+              modalScript.src = "/booking-modal.js";
+              document.body.appendChild(modalScript);
+              
+              const widgetScript = document.createElement("script");
+              widgetScript.src = "/booking-widget.js";
+              document.body.appendChild(widgetScript);
+            } catch(e) { console.error(e); }
+
             // --- ABOUT LOGIC ---
             try {
               const shop = data.shop || {};
