@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="6 6" />
+  <circle cx="100" cy="100" r="78" fill="none" stroke="currentColor" stroke-width="2"/>
+  <text x="100" y="90" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="bold" text-anchor="middle" fill="currentColor" letter-spacing="2">HERITAGE</text>
+  <text x="100" y="115" font-family="'Playfair Display', Georgia, serif" font-size="14" text-anchor="middle" fill="currentColor" letter-spacing="6">HAIRCUTS</text>
+  <path d="M 65 135 L 135 135" stroke="currentColor" stroke-width="1"/>
+  <text x="100" y="155" font-family="'Lato', sans-serif" font-size="10" text-anchor="middle" fill="currentColor" letter-spacing="1">EST. 1998</text>
+  <path d="M 100 40 L 95 55 L 105 55 Z" fill="currentColor" />
+</svg>

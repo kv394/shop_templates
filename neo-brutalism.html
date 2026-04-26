@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage Haircuts - Neo Brutalism</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0f0f0;
+      --text: #111;
+      --primary: #FFDF00;
+      --secondary: #FF499E;
+      --tertiary: #49E6FF;
+      --border: 4px solid #111;
+      --shadow: 6px 6px 0px #111;
+      --shadow-hover: 2px 2px 0px #111;
+    }
+    
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--bg);
+      border-bottom: var(--border);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-logo {
+      width: 50px;
+      height: 50px;
+      color: var(--text);
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: 2px solid transparent;
+      padding: 5px 10px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: var(--primary);
+      border: 2px solid var(--text);
+      box-shadow: 3px 3px 0px var(--text);
+    }
+    .menu-toggle {
+      display: none;
+      background: var(--secondary);
+      border: var(--border);
+      font-family: inherit;
+      font-weight: bold;
+      padding: 5px 15px;
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--primary);
+      border-bottom: var(--border);
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .hero p {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      font-weight: 700;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    .hero-marquee {
+      background: var(--text);
+      color: var(--primary);
+      padding: 15px 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-top: var(--border);
+      border-bottom: var(--border);
+      white-space: nowrap;
+      overflow: hidden;
+      display: flex;
+    }
+    .hero-marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+    }
+
+    /* Containers & Grids */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      text-transform: uppercase;
+      border-bottom: var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 40px;
+      display: inline-block;
+      background: var(--tertiary);
+      padding: 10px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    /* Cards */
+    .brutal-card {
+      background: #fff;
+      border: var(--border);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s ease-in-out;
+      display: flex;
+      flex-direction: column;
+    }
+    .brutal-card:hover {
+      transform: translate(4px, 4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .brutal-card.service { background: var(--secondary); color: #111; }
+    .brutal-card.product { background: var(--tertiary); color: #111; }
+    
+    .card-title {
+      font-size: 1.8rem;
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .card-price {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      border-bottom: 3px solid #111;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .card-desc {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      flex-grow: 1;
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .brutal-btn {
+      background: var(--primary);
+      color: var(--text);
+      border: var(--border);
+      padding: 15px 20px;
+      font-family: inherit;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 4px 4px 0px #111;
+      transition: all 0.1s;
+      text-align: center;
+      width: 100%;
+    }
+    .brutal-btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0px 0px 0px #111;
+    }
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .brutal-btn.secondary {
+      background: #fff;
+    }
+
+    /* Loading state */
+    .loading {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 100px 0;
+      text-transform: uppercase;
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg);
+        border-bottom: var(--border);
+        padding: 20px;
+        gap: 15px;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .btn-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <object data="logo.svg" type="image/svg+xml" class="nav-logo"></object>
+    <button class="menu-toggle" id="mobile-menu-btn">MENU</button>
+    <div class="nav-links" id="nav-links">
+      <a href="#about" class="nav-link active">ABOUT</a>
+      <a href="#services" class="nav-link">SERVICES</a>
+      <a href="#shop" class="nav-link">SHOP</a>
+      <a href="#reviews" class="nav-link">REVIEWS</a>
+    </div>
+  </nav>
+
+  <article id="about">
+    <div id="about-loading" class="loading">LOADING SETUP...</div>
+    <div id="about-content" style="display: none;">
+      <div class="hero">
+        <h1 id="dyn-shop-name">HERITAGE HAIRCUTS</h1>
+        <p id="dyn-shop-desc">RADICAL STYLE. SKILLED CARE. NO NONSENSE.</p>
+        <button class="brutal-btn secondary" style="width: auto; margin-top: 20px;" onclick="document.querySelector('#services').scrollIntoView({behavior: 'smooth'})">GET STARTED</button>
+      </div>
+      <div class="hero-marquee">
+        <span>FRESH FADES &mdash; BOLD LOOKS &mdash; CLASSIC CUTS &mdash; BEARD TRIMS &mdash; PREMIUM GROOMING &mdash; BOOK NOW &mdash; </span>
+      </div>
+    </div>
+  </article>
+
+  <article id="services" class="container">
+    <div id="services-loading" class="loading">FETCHING SERVICES...</div>
+    <div id="services-content" style="display: none;">
+      <h2 class="section-title">THE MENU</h2>
+      <div class="grid" id="services-grid"></div>
+    </div>
+  </article>
+
+  <article id="shop" class="container">
+    <div id="products-loading" class="loading">FETCHING GEAR...</div>
+    <div id="products-content" style="display: none;">
+      <h2 class="section-title">THE GEAR</h2>
+      <div class="grid" id="products-grid"></div>
+    </div>
+  </article>
+
+  <article id="reviews" class="container" style="padding-bottom: 100px;">
+    <div id="reviews-loading" class="loading">FETCHING REVIEWS...</div>
+    <div id="reviews-content" style="display: none;">
+      <h2 class="section-title" style="background: var(--primary);">WHAT THEY SAY</h2>
+      <div class="grid" id="reviews-grid"></div>
+      <div style="margin-top: 50px; text-align: center;">
+        <button class="brutal-btn" id="add-review-btn" style="width: auto;">DROP A REVIEW</button>
+      </div>
+    </div>
+  </article>
+
+  <script src="https://barbersaas-henna.vercel.app/barbersaas-sdk.js"></script>
+  <script src="https://barbersaas-henna.vercel.app/booking-modal.js" data-shop-id="cmn9kj24n0000lqzc7kcsmpst"></script>
+
+  <script>
+    // Mobile Menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('nav-links').classList.toggle('show');
+    });
+
+    // Smooth scroll & Active state
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('nav-links').classList.remove('show');
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerOffset = document.querySelector('.navbar').offsetHeight;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          window.scrollTo({ top: elementPosition + window.scrollY - headerOffset, behavior: "smooth" });
+        }
+      });
+    });
+
+    window.addEventListener("load", function () {
+      function init() {
+        if (typeof BarberSaaS === "undefined") return;
+        BarberSaaS.init("cmn9kj24n0000lqzc7kcsmpst");
+
+        BarberSaaS.getPublicData().then((data) => {
+          // About
+          try {
+            document.getElementById('dyn-shop-name').textContent = data.shop.name || "HERITAGE HAIRCUTS";
+            document.getElementById('dyn-shop-desc').textContent = data.shop.description || "RADICAL STYLE. SKILLED CARE.";
+            document.getElementById("about-loading").style.display = "none";
+            document.getElementById("about-content").style.display = "block";
+          } catch(e) {}
+
+          // Services
+          try {
+            const services = (data.services || []).filter(s => s.duration > 0);
+            if (services.length > 0) {
+              document.getElementById("services-grid").innerHTML = services.map(s => `
+                <div class="brutal-card service">
+                  <h3 class="card-title">${s.name}</h3>
+                  <div class="card-price">$${Number(s.price).toFixed(2)} <span style="font-size: 1rem;">/ ${s.duration} MIN</span></div>
+                  <p class="card-desc">${s.description || "Standard issue."}</p>
+                  <button class="brutal-btn b-book" data-id="${s.id}">BOOK IT</button>
+                </div>
+              `).join('');
+              document.querySelectorAll(".b-book").forEach(b => b.addEventListener('click', e => {
+                if (window.BarberBooking) window.BarberBooking.open(e.target.dataset.id);
+              }));
+            }
+            document.getElementById("services-loading").style.display = "none";
+            document.getElementById("services-content").style.display = "block";
+          } catch(e) {}
+
+          // Products
+          try {
+            const products = data.products || [];
+            if (products.length > 0) {
+              document.getElementById("products-grid").innerHTML = products.map(p => `
+                <div class="brutal-card product">
+                  <h3 class="card-title">${p.name}</h3>
+                  <div class="card-price">$${Number(p.price).toFixed(2)}</div>
+                  <p class="card-desc" style="max-height: 100px; overflow-y: auto;">${p.description || "Top tier gear."}</p>
+                  <div class="btn-group">
+                    <button class="brutal-btn secondary b-view" data-id="${p.id}" style="flex: 1;">VIEW</button>
+                    <button class="brutal-btn b-buy" data-id="${p.id}" style="flex: 1;">BUY</button>
+                  </div>
+                </div>
+              `).join('');
+              document.querySelectorAll(".b-buy").forEach(btn => btn.addEventListener("click", e => {
+                BarberSaaS.getProductDetails(e.target.dataset.id).then(p => alert("Checkout for 1x " + p.name));
+              }));
+              document.querySelectorAll(".b-view").forEach(btn => btn.addEventListener("click", e => {
+                BarberSaaS.getProductDetails(e.target.dataset.id).then(p => alert(p.name + "\\n$" + p.price + "\\n" + p.description));
+              }));
+            }
+            document.getElementById("products-loading").style.display = "none";
+            document.getElementById("products-content").style.display = "block";
+          } catch(e) {}
+
+          // Reviews
+          try {
+            const reviews = data.reviews || [];
+            if (reviews.length > 0) {
+              document.getElementById("reviews-grid").innerHTML = reviews.map(r => `
+                <div class="brutal-card" style="background: #fff; color: #111;">
+                  <h3 style="font-size: 2rem; margin: 0; color: var(--secondary);">${"★".repeat(r.rating || 5)}</h3>
+                  <p class="card-desc" style="font-weight: bold; font-size: 1.2rem;">"${r.comment || "AWESOME!"}"</p>
+                </div>
+              `).join('');
+            }
+            document.getElementById("add-review-btn").addEventListener("click", () => {
+              const aptId = prompt("Appointment ID:");
+              const rating = prompt("Rating (1-5):", "5");
+              const comment = prompt("Comments:");
+              if(aptId && rating && comment) {
+                BarberSaaS.submitReview({appointmentId: aptId, rating: parseInt(rating), comment}).then(() => alert("DONE!")).catch(e => alert("ERR: " + e.message));
+              }
+            });
+            document.getElementById("reviews-loading").style.display = "none";
+            document.getElementById("reviews-content").style.display = "block";
+          } catch(e) {}
+        });
+      }
+
+      if (typeof BarberSaaS !== "undefined") init();
+      else {
+        let attempts = 0;
+        let intv = setInterval(() => {
+          attempts++;
+          if(typeof BarberSaaS !== "undefined" || attempts >= 50) { clearInterval(intv); init(); }
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>

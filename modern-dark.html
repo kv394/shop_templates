@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage Haircuts - Elite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0c0c0c;
+      --card-bg: #151515;
+      --text-main: #eaeaea;
+      --text-muted: #888888;
+      --gold: #c5a059;
+      --gold-hover: #e0bc75;
+      --border-color: #2a2a2a;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+    }
+    
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0; 
+      width: 100%; 
+      z-index: 1000;
+      background: rgba(12, 12, 12, 0.95);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .nav-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .nav-logo {
+      width: 45px;
+      height: 45px;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-grow: 1;
+    }
+    .navbar a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .navbar a:hover, .navbar a.active {
+      color: var(--gold);
+    }
+    
+    /* Responsive Nav */
+    @media (max-width: 768px) {
+      .navbar { flex-direction: column; gap: 15px; padding: 15px 0; }
+      .nav-links { gap: 15px; flex-wrap: wrap; }
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(12, 12, 12, 0.85), rgba(12, 12, 12, 0.95)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=2000&q=80') center/cover;
+      padding: 0 20px;
+    }
+    .hero-logo-large {
+      width: 120px;
+      height: 120px;
+      color: var(--gold);
+      margin-bottom: 30px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin: 0 0 20px 0;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+    .hero-btn {
+      padding: 12px 30px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .hero-btn:hover {
+      background: var(--gold);
+      color: var(--bg-color);
+    }
+
+    /* Content Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 60px;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 20px auto 0;
+    }
+
+    /* List / Menu Layout (for Services & Products) */
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      transition: border-color 0.3s;
+    }
+    .menu-item:hover {
+      border-bottom-color: var(--gold);
+    }
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .menu-item-title {
+      font-size: 1.5rem;
+      color: var(--text-main);
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+    }
+    .menu-item-dots {
+      flex-grow: 1;
+      border-bottom: 1px dotted var(--border-color);
+      margin: 0 15px;
+      position: relative;
+      top: -6px;
+    }
+    .menu-item-price {
+      font-size: 1.25rem;
+      color: var(--gold);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .menu-item-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0 0 15px 0;
+      max-width: 85%;
+    }
+    .menu-item-actions {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    /* Grids & Cards (Kept for Reviews) */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 40px;
+      text-align: center;
+      transition: transform 0.4s, border-color 0.4s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold);
+    }
+    .card h3 {
+      font-size: 1.5rem;
+      margin: 0 0 15px 0;
+      color: var(--text-main);
+    }
+    .card .desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 25px;
+      flex-grow: 1;
+    }
+    
+    /* Buttons */
+    .btn-gold {
+      background: var(--gold);
+      color: var(--bg-color);
+      border: none;
+      padding: 12px 24px;
+      font-family: 'Lato', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+    .btn-gold:hover {
+      background: var(--gold-hover);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 10px 20px;
+      font-family: 'Lato', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--bg-color);
+    }
+
+    /* Loading state */
+    .loading {
+      text-align: center;
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      padding: 100px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="main-nav">
+    <div class="nav-logo-container">
+      <object data="logo.svg" type="image/svg+xml" class="nav-logo"></object>
+      <span style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 2px;">HERITAGE</span>
+    </div>
+    <div class="nav-links">
+      <a href="#about-heritage-container" class="active">About</a>
+      <a href="#services-heritage-container">Services</a>
+      <a href="#products-heritage-container">Shop</a>
+      <a href="#reviews-heritage-container">Reviews</a>
+    </div>
+  </nav>
+
+  <article id="about-heritage-container">
+    <div id="about-loading-spinner" class="loading">Loading Experience...</div>
+    <div id="about-page-content" style="display: none;">
+      <div class="hero">
+        <object data="logo.svg" type="image/svg+xml" class="hero-logo-large"></object>
+        <h1 id="dyn-shop-name">Heritage Haircuts</h1>
+        <p id="dyn-shop-desc">Welcome to our shop, where timeless style meets skilled care.</p>
+        <a href="#services-heritage-container" class="hero-btn">Discover Services</a>
+      </div>
+      
+      <div class="container">
+        <h2 class="section-title">The Philosophy</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.1rem; color: var(--text-muted);">
+          At <span style="color: var(--gold);" id="dyn-shop-name-2">Heritage Haircuts</span>, we believe a great haircut is more than just a routine—it's an experience. Our master barbers blend classic techniques with modern styling to deliver precision and elegance tailored specifically to you.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <article id="services-heritage-container" class="container" style="padding-top: 40px;">
+    <div id="services-loading-spinner" class="loading">Curating Services...</div>
+    <div id="services-page-content" style="display: none;">
+      <h2 class="section-title">Our Services</h2>
+      <!-- Replaced .grid with .menu-list -->
+      <div class="menu-list" id="services-grid-container"></div>
+    </div>
+  </article>
+
+  <article id="products-heritage-container" class="container">
+    <div id="products-loading-spinner" class="loading">Preparing Collection...</div>
+    <div id="products-page-content" style="display: none;">
+      <h2 class="section-title">Grooming Collection</h2>
+      <!-- Replaced .grid with .menu-list -->
+      <div class="menu-list" id="products-grid-container"></div>
+    </div>
+  </article>
+
+  <article id="reviews-heritage-container" class="container">
+    <div id="reviews-loading-spinner" class="loading">Loading Testimonials...</div>
+    <div id="reviews-page-content" style="display: none;">
+      <h2 class="section-title">Client Testimonials</h2>
+      <!-- Kept .grid for Reviews as cards usually look best for quotes -->
+      <div class="grid" id="reviews-grid-container"></div>
+      <div style="text-align: center; margin-top: 50px;">
+        <button class="btn-outline" id="add-review-btn" style="width: auto; padding: 15px 40px;">Leave a Review</button>
+      </div>
+    </div>
+  </article>
+
+  <!-- BarberSaaS SDK -->
+  <script src="https://barbersaas-henna.vercel.app/barbersaas-sdk.js"></script>
+  <!-- Booking Modal logic -->
+  <script src="https://barbersaas-henna.vercel.app/booking-modal.js" data-shop-id="cmn9kj24n0000lqzc7kcsmpst"></script>
+
+  <script>
+    // Smooth scrolling nav
+    document.querySelectorAll('#main-nav a, .hero-btn').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Update active class in navbar
+        document.querySelectorAll('#main-nav a').forEach(a => a.classList.remove('active'));
+        if (this.classList.contains('hero-btn')) {
+          const servicesLink = document.querySelector('#main-nav a[href="#services-heritage-container"]');
+          if (servicesLink) servicesLink.classList.add('active');
+        } else {
+          this.classList.add('active');
+        }
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerOffset = document.querySelector('.navbar').offsetHeight;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+  
+          window.scrollTo({
+               top: offsetPosition,
+               behavior: "smooth"
+          });
+        }
+      });
+    });
+
+    window.addEventListener("load", function () {
+      function initializeShop() {
+        if (typeof BarberSaaS === "undefined") {
+          console.error("BarberSaaS SDK failed");
+          return;
+        }
+
+        BarberSaaS.init("cmn9kj24n0000lqzc7kcsmpst");
+
+        BarberSaaS.getPublicData().then((data) => {
+          // About
+          try {
+            const shop = data.shop || {};
+            document.getElementById('dyn-shop-name').textContent = shop.name || "Heritage Haircuts";
+            document.getElementById('dyn-shop-name-2').textContent = shop.name || "Heritage Haircuts";
+            document.getElementById('dyn-shop-desc').textContent = shop.description || "Welcome to our shop, where timeless style meets skilled care.";
+            document.getElementById("about-loading-spinner").style.display = "none";
+            document.getElementById("about-page-content").style.display = "block";
+          } catch(e) {}
+
+          // Services
+          try {
+            const services = (data.services || []).filter(s => s.duration && s.duration > 0);
+            const container = document.getElementById("services-grid-container");
+            if (services.length > 0) {
+              let html = "";
+              services.forEach(service => {
+                html += `
+                  <div class="menu-item">
+                      <div class="menu-item-header">
+                        <h3 class="menu-item-title">${service.name}</h3>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">$${Number(service.price).toFixed(2)}</span>
+                      </div>
+                      <p class="menu-item-desc">${service.description || "Classic service tailored to you."} &mdash; <em>${service.duration || 30} MIN</em></p>
+                      <div class="menu-item-actions">
+                        <button class="btn-gold barber-booking-trigger" data-service-id="${service.id}" style="width: auto; padding: 10px 30px; font-size: 0.85rem;">Book Appointment</button>
+                      </div>
+                  </div>
+                `;
+              });
+              container.innerHTML = html;
+              document.querySelectorAll(".barber-booking-trigger").forEach(btn => {
+                btn.addEventListener("click", function(e) {
+                  e.preventDefault();
+                  if (typeof window.BarberBooking !== "undefined") window.BarberBooking.open(this.getAttribute("data-service-id"));
+                });
+              });
+            }
+            document.getElementById("services-loading-spinner").style.display = "none";
+            document.getElementById("services-page-content").style.display = "block";
+          } catch(e) {}
+
+          // Products
+          try {
+            const products = data.products || [];
+            const container = document.getElementById("products-grid-container");
+            if (products.length > 0) {
+              let html = "";
+              products.forEach(product => {
+                html += `
+                  <div class="menu-item">
+                      <div class="menu-item-header">
+                        <h3 class="menu-item-title">${product.name}</h3>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">$${Number(product.price).toFixed(2)}</span>
+                      </div>
+                      <p class="menu-item-desc" style="max-height: 80px; overflow-y: auto;">${product.description || "Premium grooming product."}</p>
+                      <div class="menu-item-actions">
+                        <button class="btn-outline btn-details" data-product-id="${product.id}" style="width: auto; margin: 0; padding: 10px 20px; font-size: 0.85rem;">View Details</button>
+                        <button class="btn-gold btn-buy" data-product-id="${product.id}" style="width: auto; margin: 0; padding: 10px 30px; font-size: 0.85rem;">Purchase</button>
+                      </div>
+                  </div>
+                `;
+              });
+              container.innerHTML = html;
+              document.querySelectorAll(".btn-buy").forEach(btn => btn.addEventListener("click", function(e){ e.preventDefault(); BarberSaaS.getProductDetails(this.getAttribute("data-product-id")).then(p => window.showCheckoutModal(p, 1)); }));
+              document.querySelectorAll(".btn-details").forEach(btn => btn.addEventListener("click", function(e){ e.preventDefault(); BarberSaaS.getProductDetails(this.getAttribute("data-product-id")).then(p => window.showProductModal(p)); }));
+            }
+            document.getElementById("products-loading-spinner").style.display = "none";
+            document.getElementById("products-page-content").style.display = "block";
+          } catch(e) {}
+
+          // Reviews
+          try {
+            const reviews = data.reviews || [];
+            const container = document.getElementById("reviews-grid-container");
+            if (reviews.length > 0) {
+              let html = "";
+              reviews.forEach(review => {
+                html += `
+                  <div class="card" style="padding: 30px;">
+                      <h3 style="color: var(--gold); font-size: 1.2rem;">${"★".repeat(review.rating || 5)}</h3>
+                      <p class="desc" style="font-style: italic;">"${review.comment || "An absolutely wonderful experience!"}"</p>
+                  </div>
+                `;
+              });
+              container.innerHTML = html;
+            }
+            
+            var addReviewBtn = document.getElementById("add-review-btn");
+            if(addReviewBtn) {
+              addReviewBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                const aptId = prompt("Enter Appointment ID:");
+                if(!aptId) return;
+                const rating = prompt("Rating (1-5):", "5");
+                const comment = prompt("Comments:");
+                if(aptId && rating && comment) {
+                  BarberSaaS.submitReview({appointmentId: aptId, rating: parseInt(rating), comment}).then(() => alert("Review submitted!")).catch(e => alert("Error: " + e.message));
+                }
+              });
+            }
+            document.getElementById("reviews-loading-spinner").style.display = "none";
+            document.getElementById("reviews-page-content").style.display = "block";
+          } catch(e) {}
+        });
+      }
+      
+      window.showCheckoutModal = function(product, quantity) {
+        alert("Checkout for " + quantity + "x " + product.name + "\nStripe integration pending.");
+      };
+      window.showProductModal = function(product) {
+        alert(product.name + "\n$" + Number(product.price).toFixed(2) + "\n\n" + product.description);
+      };
+
+      if (typeof BarberSaaS !== "undefined") initializeShop();
+      else {
+        let attempts = 0;
+        let intv = setInterval(() => {
+          attempts++;
+          if(typeof BarberSaaS !== "undefined" || attempts >= 50) { clearInterval(intv); initializeShop(); }
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>

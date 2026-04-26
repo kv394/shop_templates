@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage Haircuts - Classic Vintage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-paper: #f4ece4;
+      --bg-dark: #2c241b;
+      --text-main: #3e3224;
+      --text-light: #f4ece4;
+      --accent: #8b261a;
+      --border-vintage: 4px double #3e3224;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Courier Prime', monospace;
+      background-color: var(--bg-paper);
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e6dacc' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, .vintage-title {
+      font-family: 'Rye', serif;
+      font-weight: normal;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 5px solid var(--accent);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      padding: 0 20px;
+      flex-wrap: wrap;
+    }
+    .nav-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+      color: var(--text-light);
+    }
+    .navbar a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      padding: 5px 10px;
+    }
+    .navbar a:hover, .navbar a.active {
+      color: var(--accent);
+    }
+
+    /* Hero / About */
+    .hero-section {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(rgba(244, 236, 228, 0.9), rgba(244, 236, 228, 0.9)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=2000&q=80') center/cover;
+      border-bottom: var(--border-vintage);
+    }
+    .hero-logo-large {
+      width: 150px;
+      height: 150px;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+    .hero-section h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin: 0 0 15px 0;
+      color: var(--bg-dark);
+      letter-spacing: 2px;
+    }
+    .hero-section p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-weight: bold;
+    }
+    .ornament {
+      display: block;
+      margin: 20px auto;
+      font-size: 24px;
+      color: var(--accent);
+    }
+
+    /* Containers */
+    .container {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid #d4c4b7;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    .section-header {
+      font-size: 2.5rem;
+      color: var(--bg-dark);
+      margin-bottom: 10px;
+    }
+    .section-divider {
+      width: 80%;
+      height: 2px;
+      background: var(--text-main);
+      margin: 0 auto 40px;
+      position: relative;
+    }
+    .section-divider::before {
+      content: '✂';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      padding: 0 10px;
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    /* Clean List Layout (No Boxes) */
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .menu-item {
+      text-align: center;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(62, 50, 36, 0.2);
+    }
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+    .menu-item-title {
+      font-family: 'Rye', serif;
+      font-size: 2rem;
+      margin: 0 0 10px 0;
+      color: var(--bg-dark);
+      letter-spacing: 1px;
+    }
+    .menu-item-price {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+    .menu-item-desc {
+      font-size: 1rem;
+      margin: 0 auto 20px auto;
+      max-width: 500px;
+    }
+    .menu-item-actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    /* Buttons */
+    .btn-vintage {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      border: 2px solid var(--bg-dark);
+      padding: 10px 30px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 1px;
+    }
+    .btn-vintage:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--bg-dark);
+    }
+    .btn-outline:hover {
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    /* Testimonial specific */
+    .testimonial-wrap {
+      text-align: center;
+      padding: 40px 0;
+    }
+    .testimonial-stars {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+      letter-spacing: 5px;
+    }
+    .testimonial-quote {
+      font-size: 1.4rem;
+      font-style: italic;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 50px 0;
+      font-weight: bold;
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink { 50% { opacity: 0.4; } }
+
+    @media (max-width: 600px) {
+      .nav-container { flex-direction: column; gap: 10px; padding: 15px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo-container">
+        <object data="logo.svg" type="image/svg+xml" class="nav-logo"></object>
+        <span style="font-family: 'Rye', serif; font-size: 1.2rem;">HERITAGE</span>
+      </div>
+      <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+        <a href="#about" class="nav-link active">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#shop" class="nav-link">Apothecary</a>
+        <a href="#reviews" class="nav-link">Patrons</a>
+      </div>
+    </div>
+  </nav>
+
+  <article id="about">
+    <div id="about-loading" class="loading">Warming up the lather...</div>
+    <div id="about-content" style="display: none;">
+      <section class="hero-section">
+        <object data="logo.svg" type="image/svg+xml" class="hero-logo-large"></object>
+        <h1 id="dyn-shop-name">Heritage Haircuts</h1>
+        <div class="ornament">❖ ❖ ❖</div>
+        <p id="dyn-shop-desc">Classic grooming for the modern gentleman.</p>
+        <button class="btn-vintage" onclick="document.querySelector('#services').scrollIntoView({behavior: 'smooth'})">Examine Services</button>
+      </section>
+    </div>
+  </article>
+
+  <article id="services" class="container">
+    <div id="services-loading" class="loading">Checking the ledger...</div>
+    <div id="services-content" style="display: none;">
+      <h2 class="section-header">Our Services</h2>
+      <div class="section-divider"></div>
+      <div class="menu-list" id="services-list"></div>
+    </div>
+  </article>
+
+  <article id="shop" class="container">
+    <div id="products-loading" class="loading">Stocking the shelves...</div>
+    <div id="products-content" style="display: none;">
+      <h2 class="section-header">The Apothecary</h2>
+      <div class="section-divider"></div>
+      <div class="menu-list" id="products-list"></div>
+    </div>
+  </article>
+
+  <article id="reviews" class="container" style="margin-bottom: 100px;">
+    <div id="reviews-loading" class="loading">Reading the letters...</div>
+    <div id="reviews-content" style="display: none;">
+      <h2 class="section-header">Patron Reviews</h2>
+      <div class="section-divider"></div>
+      <div id="reviews-list"></div>
+      <div style="text-align: center; margin-top: 60px;">
+        <button class="btn-vintage btn-outline" id="add-review-btn">Write a Letter</button>
+      </div>
+    </div>
+  </article>
+
+  <script src="https://barbersaas-henna.vercel.app/barbersaas-sdk.js"></script>
+  <script src="https://barbersaas-henna.vercel.app/booking-modal.js" data-shop-id="cmn9kj24n0000lqzc7kcsmpst"></script>
+
+  <script>
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerOffset = document.querySelector('.navbar').offsetHeight;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          window.scrollTo({ top: elementPosition + window.scrollY - headerOffset, behavior: "smooth" });
+        }
+      });
+    });
+
+    window.addEventListener("load", function () {
+      function init() {
+        if (typeof BarberSaaS === "undefined") return;
+        BarberSaaS.init("cmn9kj24n0000lqzc7kcsmpst");
+
+        BarberSaaS.getPublicData().then((data) => {
+          try {
+            document.getElementById('dyn-shop-name').textContent = data.shop.name || "Heritage Haircuts";
+            document.getElementById('dyn-shop-desc').textContent = data.shop.description || "Classic grooming.";
+            document.getElementById("about-loading").style.display = "none";
+            document.getElementById("about-content").style.display = "block";
+          } catch(e) {}
+
+          try {
+            const services = (data.services || []).filter(s => s.duration > 0);
+            if (services.length > 0) {
+              document.getElementById("services-list").innerHTML = services.map(s => `
+                <div class="menu-item">
+                  <h3 class="menu-item-title">${s.name}</h3>
+                  <div class="menu-item-price">$${Number(s.price).toFixed(2)} &nbsp;<span style="font-size: 1rem; color: var(--text-main); font-weight: normal;">[ ${s.duration} MIN ]</span></div>
+                  <p class="menu-item-desc">${s.description || "A classic treatment."}</p>
+                  <div class="menu-item-actions">
+                    <button class="btn-vintage b-book" data-id="${s.id}">Schedule</button>
+                  </div>
+                </div>
+              `).join('');
+              document.querySelectorAll(".b-book").forEach(b => b.addEventListener('click', e => {
+                if (window.BarberBooking) window.BarberBooking.open(e.target.dataset.id);
+              }));
+            }
+            document.getElementById("services-loading").style.display = "none";
+            document.getElementById("services-content").style.display = "block";
+          } catch(e) {}
+
+          try {
+            const products = data.products || [];
+            if (products.length > 0) {
+              document.getElementById("products-list").innerHTML = products.map(p => `
+                <div class="menu-item">
+                  <h3 class="menu-item-title">${p.name}</h3>
+                  <div class="menu-item-price">$${Number(p.price).toFixed(2)}</div>
+                  <p class="menu-item-desc">${p.description || "Fine goods."}</p>
+                  <div class="menu-item-actions">
+                    <button class="btn-vintage btn-outline b-view" data-id="${p.id}">Examine</button>
+                    <button class="btn-vintage b-buy" data-id="${p.id}">Procure</button>
+                  </div>
+                </div>
+              `).join('');
+              document.querySelectorAll(".b-buy").forEach(btn => btn.addEventListener("click", e => {
+                BarberSaaS.getProductDetails(e.target.dataset.id).then(p => alert("Checkout for 1x " + p.name));
+              }));
+              document.querySelectorAll(".b-view").forEach(btn => btn.addEventListener("click", e => {
+                BarberSaaS.getProductDetails(e.target.dataset.id).then(p => alert(p.name + "\\n$" + p.price + "\\n" + p.description));
+              }));
+            }
+            document.getElementById("products-loading").style.display = "none";
+            document.getElementById("products-content").style.display = "block";
+          } catch(e) {}
+
+          try {
+            const reviews = data.reviews || [];
+            if (reviews.length > 0) {
+              document.getElementById("reviews-list").innerHTML = reviews.slice(0, 3).map(r => `
+                <div class="testimonial-wrap">
+                  <div class="testimonial-stars">${"★".repeat(r.rating || 5)}</div>
+                  <p class="testimonial-quote">"${r.comment || "Splendid!"}"</p>
+                </div>
+              `).join('');
+            }
+            document.getElementById("add-review-btn").addEventListener("click", () => {
+              const aptId = prompt("Appointment ID:");
+              const rating = prompt("Rating (1-5):", "5");
+              const comment = prompt("Comments:");
+              if(aptId && rating && comment) {
+                BarberSaaS.submitReview({appointmentId: aptId, rating: parseInt(rating), comment}).then(() => alert("Thanks!")).catch(e => alert("Error: " + e.message));
+              }
+            });
+            document.getElementById("reviews-loading").style.display = "none";
+            document.getElementById("reviews-content").style.display = "block";
+          } catch(e) {}
+        });
+      }
+
+      if (typeof BarberSaaS !== "undefined") init();
+      else {
+        let attempts = 0;
+        let intv = setInterval(() => {
+          attempts++;
+          if(typeof BarberSaaS !== "undefined" || attempts >= 50) { clearInterval(intv); init(); }
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage Haircuts - Carte Blanche Style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAFA;
+      --text-dark: #1A1A1A;
+      --text-light: #666666;
+      --accent: #D4AF37; /* Soft gold */
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+    }
+
+    /* Minimal Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(250, 250, 250, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-decoration: none;
+      color: var(--text-dark);
+    }
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+    }
+    .nav-brand span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+    .nav-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--text-dark);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Hero / Cover */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3); /* Dark overlay to make text pop */
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      margin: 0;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin-top: 20px;
+      font-weight: 300;
+    }
+
+    /* Split Section Layout (Image + Text) */
+    .split-section {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 80vh;
+    }
+    .split-section.reverse {
+      flex-direction: row-reverse;
+    }
+    .split-image {
+      flex: 1 1 50%;
+      min-height: 500px;
+      background-size: cover;
+      background-position: center;
+    }
+    .split-content {
+      flex: 1 1 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8% 8%;
+      box-sizing: border-box;
+      background: var(--bg);
+    }
+    
+    .section-tag {
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+    .section-heading {
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      margin: 0 0 30px 0;
+      line-height: 1.1;
+      color: var(--text-dark);
+    }
+
+    /* List Layout (Replacing Cards) */
+    .item-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .item-row {
+      display: flex;
+      flex-direction: column;
+      padding: 30px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .item-row:last-child {
+      border-bottom: none;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .item-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      margin: 0;
+      color: var(--text-dark);
+    }
+    .item-price {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+    }
+    .item-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin: 0 0 20px 0;
+      max-width: 90%;
+    }
+    
+    /* Buttons */
+    .btn-solid {
+      background: var(--text-dark);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      align-self: flex-start;
+    }
+    .btn-solid:hover {
+      background: #333;
+    }
+    .btn-text {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--text-dark);
+      border-bottom: 1px solid var(--text-dark);
+      padding-bottom: 3px;
+      margin-right: 20px;
+      transition: opacity 0.3s;
+    }
+    .btn-text:hover {
+      opacity: 0.6;
+    }
+
+    /* Testimonials Carousel feel */
+    .testimonial-wrap {
+      padding: 100px 20px;
+      text-align: center;
+      background: #F0F0F0;
+    }
+    .testimonial {
+      max-width: 800px;
+      margin: 0 auto 60px auto;
+    }
+    .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+    }
+    .stars {
+      color: var(--text-dark);
+      letter-spacing: 5px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 100px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 900px) {
+      .split-image { min-height: 300px; }
+      .navbar { padding: 15px 20px; }
+      .nav-links { display: none; /* In a real app, add a hamburger menu here */ }
+      .split-content { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <a href="#" class="nav-brand">
+      <object data="logo.svg" type="image/svg+xml" class="nav-logo" style="pointer-events: none;"></object>
+      <span>HERITAGE</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about" class="nav-link active">About</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#shop" class="nav-link">Shop</a>
+    </div>
+  </nav>
+
+  <div id="about-loading" class="loading">Curating experience...</div>
+  <div id="about-content" style="display: none;">
+    <section class="hero" id="about">
+      <div class="hero-content">
+        <h1 id="dyn-shop-name">Heritage Haircuts</h1>
+        <p id="dyn-shop-desc">The modern standard for classic grooming.</p>
+      </div>
+    </section>
+
+    <!-- The "Carte Blanche" style split section for Services -->
+    <section class="split-section" id="services">
+      <div class="split-image" style="background-image: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1000&q=80');"></div>
+      <div class="split-content">
+        <span class="section-tag">Our Menu</span>
+        <h2 class="section-heading">Bespoke<br>Services.</h2>
+        <div id="services-loading" class="loading" style="padding: 20px 0;">Loading...</div>
+        <ul class="item-list" id="services-list" style="display: none;"></ul>
+      </div>
+    </section>
+
+    <!-- Reverse split section for Products -->
+    <section class="split-section reverse" id="shop">
+      <div class="split-image" style="background-image: url('https://images.unsplash.com/photo-1585232004423-244e0e6904e3?auto=format&fit=crop&w=1000&q=80');"></div>
+      <div class="split-content">
+        <span class="section-tag">Apothecary</span>
+        <h2 class="section-heading">Curated<br>Goods.</h2>
+        <div id="products-loading" class="loading" style="padding: 20px 0;">Loading...</div>
+        <ul class="item-list" id="products-list" style="display: none;"></ul>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonial-wrap">
+      <span class="section-tag">Client Words</span>
+      <div id="reviews-loading" class="loading" style="padding: 20px 0;">Loading...</div>
+      <div id="reviews-content" style="display: none;">
+        <div id="reviews-list"></div>
+        <button class="btn-solid" id="add-review-btn" style="margin-top: 40px;">Leave a Review</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://barbersaas-henna.vercel.app/barbersaas-sdk.js"></script>
+  <script src="https://barbersaas-henna.vercel.app/booking-modal.js" data-shop-id="cmn9kj24n0000lqzc7kcsmpst"></script>
+
+  <script>
+    // Smooth scroll for nav
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerOffset = document.querySelector('.navbar').offsetHeight;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          window.scrollTo({ top: elementPosition + window.scrollY - headerOffset, behavior: "smooth" });
+        }
+      });
+    });
+
+    window.addEventListener("load", function () {
+      function init() {
+        if (typeof BarberSaaS === "undefined") return;
+        BarberSaaS.init("cmn9kj24n0000lqzc7kcsmpst");
+
+        BarberSaaS.getPublicData().then((data) => {
+          // General
+          try {
+            document.getElementById('dyn-shop-name').textContent = data.shop.name || "Heritage Haircuts";
+            document.getElementById('dyn-shop-desc').textContent = data.shop.description || "The modern standard for classic grooming.";
+            document.getElementById("about-loading").style.display = "none";
+            document.getElementById("about-content").style.display = "block";
+          } catch(e) {}
+
+          // Services
+          try {
+            const services = (data.services || []).filter(s => s.duration > 0);
+            if (services.length > 0) {
+              document.getElementById("services-list").innerHTML = services.map(s => `
+                <li class="item-row">
+                  <div class="item-header">
+                    <h3 class="item-title">${s.name}</h3>
+                    <span class="item-price">$${Number(s.price).toFixed(2)}</span>
+                  </div>
+                  <p class="item-desc">${s.description || "A tailored experience."} &mdash; ${s.duration} Min</p>
+                  <div>
+                    <button class="btn-text b-book" data-id="${s.id}">Book Appointment</button>
+                  </div>
+                </li>
+              `).join('');
+              document.querySelectorAll(".b-book").forEach(b => b.addEventListener('click', e => {
+                if (window.BarberBooking) window.BarberBooking.open(e.target.dataset.id);
+              }));
+            }
+            document.getElementById("services-loading").style.display = "none";
+            document.getElementById("services-list").style.display = "block";
+          } catch(e) {}
+
+          // Products
+          try {
+            const products = data.products || [];
+            if (products.length > 0) {
+              document.getElementById("products-list").innerHTML = products.map(p => `
+                <li class="item-row">
+                  <div class="item-header">
+                    <h3 class="item-title">${p.name}</h3>
+                    <span class="item-price">$${Number(p.price).toFixed(2)}</span>
+                  </div>
+                  <p class="item-desc">${p.description || "Premium grooming essential."}</p>
+                  <div>
+                    <button class="btn-text b-view" data-id="${p.id}">Details</button>
+                    <button class="btn-text b-buy" data-id="${p.id}">Purchase</button>
+                  </div>
+                </li>
+              `).join('');
+              document.querySelectorAll(".b-buy").forEach(btn => btn.addEventListener("click", e => {
+                BarberSaaS.getProductDetails(e.target.dataset.id).then(p => alert("Checkout for 1x " + p.name));
+              }));
+              document.querySelectorAll(".b-view").forEach(btn => btn.addEventListener("click", e => {
+                BarberSaaS.getProductDetails(e.target.dataset.id).then(p => alert(p.name + "\\n$" + p.price + "\\n" + p.description));
+              }));
+            }
+            document.getElementById("products-loading").style.display = "none";
+            document.getElementById("products-list").style.display = "block";
+          } catch(e) {}
+
+          // Reviews
+          try {
+            const reviews = data.reviews || [];
+            if (reviews.length > 0) {
+              // Only show top 3 for this layout to keep it clean
+              document.getElementById("reviews-list").innerHTML = reviews.slice(0,3).map(r => `
+                <div class="testimonial">
+                  <div class="stars">${"★".repeat(r.rating || 5)}</div>
+                  <p class="quote">"${r.comment || "An absolutely stellar experience."}"</p>
+                </div>
+              `).join('');
+            }
+            document.getElementById("add-review-btn").addEventListener("click", () => {
+              const aptId = prompt("Appointment ID:");
+              const rating = prompt("Rating (1-5):", "5");
+              const comment = prompt("Comments:");
+              if(aptId && rating && comment) {
+                BarberSaaS.submitReview({appointmentId: aptId, rating: parseInt(rating), comment}).then(() => alert("Thank you.")).catch(e => alert("Error: " + e.message));
+              }
+            });
+            document.getElementById("reviews-loading").style.display = "none";
+            document.getElementById("reviews-content").style.display = "block";
+          } catch(e) {}
+        });
+      }
+
+      if (typeof BarberSaaS !== "undefined") init();
+      else {
+        let attempts = 0;
+        let intv = setInterval(() => {
+          attempts++;
+          if(typeof BarberSaaS !== "undefined" || attempts >= 50) { clearInterval(intv); init(); }
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage Haircuts - Minimal</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #222222;
+      --text-light: #666666;
+      --accent: #000000;
+      --border: #eeeeee;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      margin: 0;
+      padding-top: 100px;
+      font-weight: 300;
+    }
+    .navbar {
+      position: fixed;
+      top: 0; width: 100%; z-index: 100;
+      padding: 30px 0;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+    .navbar a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 0.9em;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .navbar a:hover, .navbar a.active {
+      color: var(--accent);
+      font-weight: 500;
+    }
+    article { max-width: 800px; margin: 0 auto 100px auto; padding: 0 20px; scroll-margin-top: 150px; min-height: 80vh; }
+    .content-section { padding: 40px 0; }
+    .shop-welcome { text-align: center; margin-bottom: 60px; }
+    h1.main-title { font-family: 'Georgia', serif; font-size: 2.5em; font-weight: normal; margin: 0 0 20px; }
+    .intro-paragraph { font-size: 1.1em; color: var(--text-light); max-width: 500px; margin: 0 auto; }
+    h2.section-header { font-family: 'Georgia', serif; font-size: 1.8em; font-weight: normal; text-align: center; margin-bottom: 40px; }
+    .services-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+    .service-card {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 40px;
+    }
+    .service-card:last-child { border-bottom: none; }
+    .service-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
+    .service-name { font-family: 'Georgia', serif; font-size: 1.5em; margin: 0; font-weight: normal; }
+    .service-price { font-size: 1.2em; }
+    .service-duration { display: block; color: var(--text-light); font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+    .service-description { color: var(--text-light); margin-bottom: 25px; }
+    .barber-booking-trigger, .btn {
+      background: transparent; color: var(--accent); border: 1px solid var(--accent); padding: 10px 30px; font-size: 0.85em; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s;
+    }
+    .barber-booking-trigger:hover, .btn:hover { background: var(--accent); color: var(--bg); }
+    .action-buttons { display: flex; gap: 15px; }
+    .review-btn-container { text-align: center; margin-top: 60px; }
+    .barber-reviews-trigger { background: var(--accent); color: var(--bg); border: none; padding: 15px 40px; font-size: 0.85em; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="main-nav">
+    <a href="#about-heritage-container" class="active">About</a>
+    <a href="#services-heritage-container">Services</a>
+    <a href="#products-heritage-container">Shop</a>
+    <a href="#reviews-heritage-container">Reviews</a>
+  </nav>
+
+  <script>
+    document.querySelectorAll('#main-nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('#main-nav a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerOffset = document.querySelector('.navbar').offsetHeight;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset - 20;
+  
+          window.scrollTo({
+               top: offsetPosition,
+               behavior: "smooth"
+          });
+        }
+      });
+    });
+  </script>
+
+  <article id="about-heritage-container">
+    <div id="about-loading-spinner" style="text-align: center; padding: 100px 20px;">Loading...</div>
+    <div id="about-page-content" style="display: none;">
+      <section class="content-section" id="about">
+        <header class="shop-welcome">
+          <h1 class="main-title" id="dyn-shop-name">Heritage Haircuts</h1>
+          <p class="intro-paragraph" id="dyn-shop-desc">Welcome to our shop, where timeless style meets skilled care.</p>
+        </header>
+        <p style="text-align: center; color: var(--text-light); max-width: 600px; margin: 0 auto;">
+          We believe a great haircut should reflect your personality and fit your lifestyle. Whether you want a sharp professional cut, a classic style, or a fresh modern look, our team takes the time to listen, understand, and deliver with precision.
+        </p>
+      </section>
+    </div>
+  </article>
+
+  <article id="services-heritage-container">
+    <div id="services-loading-spinner" style="text-align: center; padding: 100px 20px;">Loading...</div>
+    <div id="services-page-content" style="display: none;">
+      <section class="content-section" id="services">
+        <h2 class="section-header">Services</h2>
+        <div class="services-grid" id="services-grid-container"></div>
+      </section>
+    </div>
+  </article>
+
+  <article id="products-heritage-container">
+    <div id="products-loading-spinner" style="text-align: center; padding: 100px 20px;">Loading...</div>
+    <div id="products-page-content" style="display: none;">
+      <section class="content-section" id="shop">
+        <h2 class="section-header">Products</h2>
+        <div class="services-grid" id="products-grid-container"></div>
+      </section>
+    </div>
+  </article>
+
+  <article id="reviews-heritage-container">
+    <div id="reviews-loading-spinner" style="text-align: center; padding: 100px 20px;">Loading...</div>
+    <div id="reviews-page-content" style="display: none;">
+      <section class="content-section" id="reviews">
+        <h2 class="section-header">Reviews</h2>
+        <div class="services-grid" id="reviews-grid-container"></div>
+        <div class="review-btn-container">
+          <button class="barber-reviews-trigger" id="add-review-btn">Write a Review</button>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- BarberSaaS SDK -->
+  <script src="https://barbersaas-henna.vercel.app/barbersaas-sdk.js"></script>
+  <!-- Booking Modal logic -->
+  <script src="https://barbersaas-henna.vercel.app/booking-modal.js" data-shop-id="cmn9kj24n0000lqzc7kcsmpst"></script>
+
+  <script>
+    window.addEventListener("load", function () {
+      function initializeShop() {
+        if (typeof BarberSaaS === "undefined") return;
+        BarberSaaS.init("cmn9kj24n0000lqzc7kcsmpst");
+
+        BarberSaaS.getPublicData().then((data) => {
+          // About
+          try {
+            const shop = data.shop || {};
+            document.getElementById('dyn-shop-name').textContent = shop.name || "Heritage Haircuts";
+            document.getElementById('dyn-shop-desc').textContent = shop.description || "";
+            document.getElementById("about-loading-spinner").style.display = "none";
+            document.getElementById("about-page-content").style.display = "block";
+          } catch(e) {}
+
+          // Services
+          try {
+            const services = (data.services || []).filter(s => s.duration && s.duration > 0);
+            const container = document.getElementById("services-grid-container");
+            if (services.length > 0) {
+              let html = "";
+              services.forEach(service => {
+                html += `
+                  <div class="service-card">
+                      <div class="service-header">
+                        <h3 class="service-name">${service.name}</h3>
+                        <span class="service-price">$${Number(service.price).toFixed(2)}</span>
+                      </div>
+                      <span class="service-duration">${service.duration || 30} MIN</span>
+                      <p class="service-description">${service.description || ""}</p>
+                      <button class="barber-booking-trigger" data-service-id="${service.id}">Book Appointment</button>
+                  </div>
+                `;
+              });
+              container.innerHTML = html;
+              document.querySelectorAll(".barber-booking-trigger").forEach(btn => {
+                btn.addEventListener("click", function(e) {
+                  e.preventDefault();
+                  if (typeof window.BarberBooking !== "undefined") window.BarberBooking.open(this.getAttribute("data-service-id"));
+                });
+              });
+            }
+            document.getElementById("services-loading-spinner").style.display = "none";
+            document.getElementById("services-page-content").style.display = "block";
+          } catch(e) {}
+
+          // Products
+          try {
+            const products = data.products || [];
+            const container = document.getElementById("products-grid-container");
+            if (products.length > 0) {
+              let html = "";
+              products.forEach(product => {
+                html += `
+                  <div class="service-card">
+                      <div class="service-header">
+                        <h3 class="service-name">${product.name}</h3>
+                        <span class="service-price">$${Number(product.price).toFixed(2)}</span>
+                      </div>
+                      <p class="service-description">${product.description || ""}</p>
+                      <div class="action-buttons">
+                          <button class="btn btn-buy" data-product-id="${product.id}">Buy</button>
+                      </div>
+                  </div>
+                `;
+              });
+              container.innerHTML = html;
+              document.querySelectorAll(".btn-buy").forEach(btn => btn.addEventListener("click", function(e){ e.preventDefault(); BarberSaaS.getProductDetails(this.getAttribute("data-product-id")).then(p => window.showCheckoutModal(p, 1)); }));
+            }
+            document.getElementById("products-loading-spinner").style.display = "none";
+            document.getElementById("products-page-content").style.display = "block";
+          } catch(e) {}
+
+          // Reviews
+          try {
+            const reviews = data.reviews || [];
+            const container = document.getElementById("reviews-grid-container");
+            if (reviews.length > 0) {
+              let html = "";
+              reviews.forEach(review => {
+                html += `
+                  <div class="service-card">
+                      <div class="service-name" style="font-size: 1.2em; margin-bottom: 10px;">${"★".repeat(review.rating || 5)}</div>
+                      <p class="service-description" style="font-style: italic;">"${review.comment || "Great service!"}"</p>
+                  </div>
+                `;
+              });
+              container.innerHTML = html;
+            }
+            
+            var addReviewBtn = document.getElementById("add-review-btn");
+            if(addReviewBtn) {
+              addReviewBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                const aptId = prompt("Enter Appointment ID:");
+                if(!aptId) return;
+                const rating = prompt("Rating (1-5):", "5");
+                const comment = prompt("Comments:");
+                if(aptId && rating && comment) {
+                  BarberSaaS.submitReview({appointmentId: aptId, rating: parseInt(rating), comment}).then(() => alert("Review submitted!")).catch(e => alert("Error: " + e.message));
+                }
+              });
+            }
+            document.getElementById("reviews-loading-spinner").style.display = "none";
+            document.getElementById("reviews-page-content").style.display = "block";
+          } catch(e) {}
+        });
+      }
+      
+      window.showCheckoutModal = function(product, quantity) {
+        alert("Checkout for " + quantity + "x " + product.name);
+      };
+
+      if (typeof BarberSaaS !== "undefined") initializeShop();
+      else {
+        let attempts = 0;
+        let intv = setInterval(() => {
+          attempts++;
+          if(typeof BarberSaaS !== "undefined" || attempts >= 50) { clearInterval(intv); initializeShop(); }
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>
