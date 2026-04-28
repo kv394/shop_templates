@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sport Clips - Haircuts for Men</title>
+  <title>Barber Shop</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #E31837; /* Sport Clips Red */
+      --primary: #E31837; /* Will be overridden by shop data */
       --black: #000000;
       --dark-gray: #222222;
       --light-gray: #F4F4F4;
       --white: #FFFFFF;
       --text-main: #333333;
     }
-    
+
     html { scroll-behavior: smooth; }
-    
+
     body {
       font-family: 'Roboto', sans-serif;
       background-color: var(--white);
@@ -26,7 +26,7 @@
       line-height: 1.6;
     }
 
-    h1, h2, h3, .sport-title {
+    h1, h2, h3 {
       font-family: 'Roboto', sans-serif;
       font-weight: 900;
       text-transform: uppercase;
@@ -34,7 +34,7 @@
       letter-spacing: 1px;
     }
 
-    /* Navbar - Aligned with user profile */
+    /* Navbar */
     .navbar {
       background: var(--white);
       color: var(--black);
@@ -99,7 +99,7 @@
       color: var(--primary) !important;
     }
 
-    /* Hero / About */
+    /* Hero Section */
     .hero-section {
       text-align: center;
       padding: 80px 20px;
@@ -119,7 +119,7 @@
       font-weight: 700;
       text-transform: uppercase;
     }
-    
+
     /* Containers */
     .container {
       max-width: 1200px;
@@ -157,7 +157,7 @@
       gap: 20px;
     }
 
-    /* Cards - Uniform */
+    /* Cards */
     .card {
       background: var(--light-gray);
       border-top: 4px solid var(--primary);
@@ -312,34 +312,34 @@
     <div class="nav-container">
       <a href="#" class="nav-brand">
         <object data="logo.svg" type="image/svg+xml" class="nav-logo" style="pointer-events: none;"></object>
-        <span id="dyn-shop-name-nav" style="font-family: 'Roboto', sans-serif; font-weight: 900; font-size: 1.2rem; text-transform: uppercase; letter-spacing: -1px; color: var(--primary);">SPORT CLIPS</span>
+        <span id="dyn-shop-name-nav">Barber Shop</span>
       </a>
       <div class="nav-links">
-        <a href="#about" class="nav-link active">The MVP</a>
-        <a href="#services" class="nav-link">Haircuts</a>
+        <a href="#about" class="nav-link active">About</a>
+        <a href="#services" class="nav-link">Services</a>
         <a href="#shop" class="nav-link">Products</a>
         <a href="#reviews" class="nav-link">Reviews</a>
-        <a href="#services" class="nav-link nav-cta">Check In Now</a>
+        <a href="#services" class="nav-link nav-cta">Book Now</a>
       </div>
     </div>
   </nav>
 
   <article id="about">
-    <div id="about-loading" class="loading">Loading Stats...</div>
+    <div id="about-loading" class="loading">Loading...</div>
     <div id="about-content" style="display: none;">
       <section class="hero-section">
-        <h1 id="dyn-shop-name">Sport Clips Haircuts</h1>
-        <p id="dyn-shop-desc">It's good to be a guy.</p>
+        <h1 id="dyn-shop-name">Barber Shop</h1>
+        <p id="dyn-shop-desc">Professional grooming services</p>
         <button class="btn b-book" style="max-width: 280px; min-height: 48px; font-size: 1.05rem; margin: 0 auto; display: block;" onclick="document.querySelector('#services').scrollIntoView({behavior: 'smooth'})">Find a Service</button>
       </section>
     </div>
   </article>
 
   <article id="services" class="container">
-    <div id="services-loading" class="loading">Loading Playbook...</div>
+    <div id="services-loading" class="loading">Loading services...</div>
     <div id="services-content" style="display: none;">
       <div class="section-header-wrap">
-        <h2 class="section-header">Haircuts & Services</h2>
+        <h2 class="section-header">Services</h2>
       </div>
       <div class="grid" id="services-list"></div>
     </div>
@@ -347,10 +347,10 @@
 
   <article id="shop" class="container" style="background-color: var(--light-gray); padding-top: 50px; padding-bottom: 50px; max-width: 100%;">
     <div style="max-width: 1200px; margin: 0 auto;">
-      <div id="products-loading" class="loading">Loading Gear...</div>
+      <div id="products-loading" class="loading">Loading products...</div>
       <div id="products-content" style="display: none;">
         <div class="section-header-wrap">
-          <h2 class="section-header">Pro Gear</h2>
+          <h2 class="section-header">Products</h2>
         </div>
         <div class="grid" id="products-list"></div>
       </div>
@@ -358,14 +358,14 @@
   </article>
 
   <article id="reviews" class="container" style="margin-bottom: 80px;">
-    <div id="reviews-loading" class="loading">Loading Highlights...</div>
+    <div id="reviews-loading" class="loading">Loading reviews...</div>
     <div id="reviews-content" style="display: none;">
       <div class="section-header-wrap">
-        <h2 class="section-header">Fan Highlights</h2>
+        <h2 class="section-header">Reviews</h2>
       </div>
       <div class="grid" id="reviews-list"></div>
       <div style="text-align: center; margin-top: 40px;">
-        <button class="btn btn-outline" id="add-review-btn" style="max-width: 260px;">Submit Highlight</button>
+        <button class="btn btn-outline" id="add-review-btn" style="max-width: 260px;">Submit Review</button>
       </div>
     </div>
   </article>
@@ -381,7 +381,7 @@
       if (domain === "null" || domain === "about://" || !domain) {
         domain = "https://barbersaas-henna.vercel.app";
       }
-      
+
       const sdkScript = document.createElement("script");
       sdkScript.src = isFileProtocol && domain === "file://" ? "../barbersaas-sdk.js?v=4" : domain + "/barbersaas-sdk.js?v=4";
       document.head.appendChild(sdkScript);
@@ -394,7 +394,7 @@
         e.preventDefault();
         document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
         this.classList.add('active');
-        
+
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
@@ -408,7 +408,7 @@
     window.addEventListener("load", function () {
       function initializeShop() {
         if (typeof BarberSaaS === "undefined") return;
-        
+
         const urlParams = new URLSearchParams(window.location.search);
         let shopId = urlParams.get("shopId");
         if (!shopId) {
@@ -423,22 +423,23 @@
                 shopId = paths[paths.length - 1];
             } catch(e) {}
         }
-        shopId = shopId || "cmn9kj24n0000lqzc7kcsmpst";
-        
+        // CHANGE THIS SHOP ID TO YOUR SHOP'S ID
+        shopId = shopId || "{{SHOP_ID}}";
+
         let domain = window.location.origin;
         let isFileProtocol = window.location.protocol === "file:";
-        
+
         if (domain === "null" || domain === "about://" || window.location.protocol === "about:" || isFileProtocol) {
           try { domain = window.parent.location.origin; } catch(e) {}
         }
         if (domain === "null" || domain === "about://" || domain === "file://" || !domain) {
           domain = "https://barbersaas-henna.vercel.app";
         }
-        
+
         const apiUrlToUse = (domain.includes("localhost") || domain.includes("127.0.0.1")) && !isFileProtocol ? domain : "https://barbersaas-henna.vercel.app";
 
         // Initialize SDK
-        BarberSaaS.init(shopId, { 
+        BarberSaaS.init(shopId, {
             position: "bottom-right",
             apiUrl: apiUrlToUse
         });
@@ -446,18 +447,14 @@
         BarberSaaS.getPublicData().then((data) => {
           try {
             const shop = data.shop || {};
-            
-            // Extract dynamic theme colors
-            const primaryColor = shop.primaryColor || "#E31837"; // fallback to Sport Clips Red
-            const secondaryColor = shop.secondaryColor || "#000000"; 
-            
-            // Set on SDK
-            window.BarberSaaS.primaryColor = primaryColor;
-            window.BarberSaaS.secondaryColor = secondaryColor;
-            
-            // Inject CSS Variables for iframe
+
+            // Extract dynamic theme colors from shop data
+            const primaryColor = shop.primaryColor || "#E31837";
+            const secondaryColor = shop.secondaryColor || "#000000";
+
+            // Apply dynamic theming
             document.documentElement.style.setProperty('--primary', primaryColor, 'important');
-            
+
             const styleEl = document.createElement('style');
             styleEl.innerHTML = `
               :root {
@@ -472,70 +469,27 @@
               #widget-button svg { fill: #ffffff !important; }
             `;
             document.body.appendChild(styleEl);
-            
-            // IMPORTANT FIX: Inject CSS Variables into Parent Next.js Page (for Auth Button alignment and color)
-            try {
-               const parentDoc = window.parent.document;
-               if (parentDoc) {
-                   const parentStyleEl = parentDoc.createElement('style');
-                   parentStyleEl.innerHTML = `
-                     :root {
-                       --crm-primary: ${primaryColor} !important;
-                     }
-                     .bg-crm-primary { background-color: ${primaryColor} !important; }
-                     .text-crm-primary { color: ${primaryColor} !important; }
-                     .border-crm-primary { border-color: ${primaryColor} !important; }
-                     
-                     /* Targeting the specific SupabaseAuthButton inside the Next.js parent */
-                     div.bg-crm-primary { background-color: ${primaryColor} !important; }
-                   `;
-                   parentDoc.body.appendChild(parentStyleEl);
-               }
-            } catch(e) { console.log('Could not inject styles into parent page (CORS or direct load)'); }
 
-            // Inject Chatbot and Booking widgets
-            setTimeout(() => {
-                const cacheBuster = "?v=" + new Date().getTime();
-                const widgetUrlPrefix = (isFileProtocol && domain === "file://") ? ".." : domain;
-                
-                const modalScript = document.createElement("script");
-                modalScript.src = widgetUrlPrefix + "/booking-modal.js" + cacheBuster;
-                modalScript.setAttribute("data-shop-id", shopId);
-                modalScript.setAttribute("data-theme-color", primaryColor);
-                document.body.appendChild(modalScript);
-                
-                const widgetScript = document.createElement("script");
-                widgetScript.src = widgetUrlPrefix + "/booking-widget.js" + cacheBuster;
-                widgetScript.setAttribute("data-shop-id", shopId);
-                widgetScript.setAttribute("data-theme-color", primaryColor);
-                document.body.appendChild(widgetScript);
-            }, 50);
-
-          } catch(e) { console.error(e); }
-
-          // Render Content
-          try {
-            document.getElementById('dyn-shop-name').textContent = data.shop.name || "Sport Clips Haircuts";
-            document.getElementById('dyn-shop-name-nav').textContent = data.shop.name || "SPORT CLIPS";
-            document.getElementById('dyn-shop-desc').textContent = data.shop.description || "It's good to be a guy.";
+            // Update shop content
+            document.getElementById('dyn-shop-name').textContent = shop.name || "Barber Shop";
+            document.getElementById('dyn-shop-name-nav').textContent = shop.name || "Barber Shop";
+            document.getElementById('dyn-shop-desc').textContent = shop.description || "Professional grooming services";
             document.getElementById("about-loading").style.display = "none";
             document.getElementById("about-content").style.display = "block";
-          } catch(e) {}
+
+          } catch(e) { console.error(e); }
 
           try {
             const services = (data.services || []).filter(s => s.duration > 0);
             if (services.length > 0) {
-              document.getElementById("services-list").innerHTML = services.map(s => {
-                const desc = s.description || "The MVP Experience.";
-                const truncatedDesc = desc.length > 80 ? desc.substring(0, 80) + "..." : desc;
-                return `
+              document.getElementById("services-list").innerHTML = services.map(s => `
                 <div class="card">
                   <h3 class="card-title">${s.name}</h3>
                   <div class="card-price">$${Number(s.price).toFixed(2)} <span style="font-size: 0.85rem; color: var(--text-main);">/ ${s.duration} MIN</span></div>
-                  <p class="card-desc" title="${s.description || ""}">${truncatedDesc}</p>
-                  <button class="btn b-book" data-id="${s.id}">Check In</button>
+                  <p class="card-desc" title="${s.description || ""}">${s.description || "Professional service"}</p>
+                  <button class="btn b-book" data-id="${s.id}">Book Now</button>
                 </div>
-              `}).join('');
+              `).join('');
               document.querySelectorAll(".b-book").forEach(b => b.addEventListener('click', e => {
                 if (window.BarberBooking) window.BarberBooking.open(e.target.dataset.id);
               }));
@@ -547,20 +501,17 @@
           try {
             const products = data.products || [];
             if (products.length > 0) {
-              document.getElementById("products-list").innerHTML = products.map(p => {
-                const desc = p.description || "Top-tier grooming gear.";
-                const truncatedDesc = desc.length > 80 ? desc.substring(0, 80) + "..." : desc;
-                return `
+              document.getElementById("products-list").innerHTML = products.map(p => `
                 <div class="card" style="background: var(--white);">
                   <h3 class="card-title">${p.name}</h3>
                   <div class="card-price">$${Number(p.price).toFixed(2)}</div>
-                  <p class="card-desc" title="${p.description || ""}">${truncatedDesc}</p>
+                  <p class="card-desc" title="${p.description || ""}">${p.description || "Premium product"}</p>
                   <div class="card-actions">
                     <button class="btn btn-outline b-view" data-id="${p.id}">Details</button>
                     <button class="btn b-buy" data-id="${p.id}">Buy Now</button>
                   </div>
                 </div>
-              `}).join('');
+              `).join('');
               document.querySelectorAll(".b-buy").forEach(btn => btn.addEventListener("click", e => {
                 BarberSaaS.getProductDetails(e.target.dataset.id).then(p => alert("Added to cart: 1x " + p.name));
               }));
@@ -578,7 +529,7 @@
               document.getElementById("reviews-list").innerHTML = reviews.slice(0, 3).map(r => `
                 <div class="testimonial">
                   <div class="testimonial-stars">${"★".repeat(r.rating || 5)}</div>
-                  <p class="testimonial-quote">${r.comment || "Great experience, highly recommend!"}</p>
+                  <p class="testimonial-quote">${r.comment || "Great experience!"}</p>
                 </div>
               `).join('');
             }
@@ -587,7 +538,7 @@
               const rating = prompt("Rating (1-5):", "5");
               const comment = prompt("Comments:");
               if(aptId && rating && comment) {
-                BarberSaaS.submitReview({appointmentId: aptId, rating: parseInt(rating), comment}).then(() => alert("Highlight submitted!")).catch(e => alert("Error: " + e.message));
+                BarberSaaS.submitReview({appointmentId: aptId, rating: parseInt(rating), comment}).then(() => alert("Review submitted!")).catch(e => alert("Error: " + e.message));
               }
             });
             document.getElementById("reviews-loading").style.display = "none";
